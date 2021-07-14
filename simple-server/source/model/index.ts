@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import db from '../config/database/database.config';
+import { v4 as uuidv4 } from 'uuid';
 
 interface ITodo {
     id: string;
@@ -12,13 +13,15 @@ interface ITodo {
 export class TodoInstance extends Model<ITodo> {}
 
 const now = new Date().toISOString();
+const id = uuidv4();
 
 TodoInstance.init(
     {
         id: {
-            type: DataTypes.STRING,
+            type: DataTypes.UUIDV4,
             primaryKey: true,
-            allowNull: false
+            allowNull: false,
+            defaultValue: id
         },
         title: {
             type: DataTypes.STRING,
@@ -27,7 +30,7 @@ TodoInstance.init(
         completed: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
-            defaultValue: true
+            defaultValue: false
         },
         createdAt: {
             type: DataTypes.STRING,

@@ -1,10 +1,11 @@
 import express from 'express';
-import controller from '../controllers/todos';
+import Controller from '../controllers/todos';
 import TodoValidator from '../validator';
 import Middleware from '../middleware';
 
 const router = express.Router();
 
-router.post('/create', TodoValidator.checkCreateTodo(), Middleware.handleValidationError, controller.createTodo);
+router.post('/create', TodoValidator.checkCreateTodo(), Middleware.handleValidationError, Controller.createTodo);
+router.get('/read', TodoValidator.readAllTodos(), Middleware.handleValidationError, Controller.readAllTodos);
 
 export = router;

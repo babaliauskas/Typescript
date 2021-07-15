@@ -22,10 +22,15 @@ router.use('/health', healthRouter);
 router.use('/todo', todoRouter);
 
 router.use((req, res, next) => {
-    const error = new Error('Not Found');
+  const error = new Error('Not Found');
 
-    return res.status(400).json({ message: error.message });
+  return res.status(400).json({ message: error.message });
 });
 
 const httpServer = http.createServer(router);
-httpServer.listen(config.server.port, () => logging.info(NAMESPACE, `Server running on ${config.server.hostname}:${config.server.port}`));
+httpServer.listen(config.server.port, () =>
+  logging.info(
+    NAMESPACE,
+    `Server running on ${config.server.hostname}:${config.server.port}`
+  )
+);
